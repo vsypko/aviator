@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+.parcel-cache/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -65,4 +66,4 @@ node_modules/
 
 # dotenv environment variables file
 .env
-.vscode
+.vscode/

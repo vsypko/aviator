@@ -24,7 +24,7 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true,
 })
 let mouseDown = false
-let currentDeviceAngle = 60
+let currentDeviceAngle = 0
 
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.shadowMap.enabled = true
@@ -98,8 +98,9 @@ function handleWheel(e) {
   let deltaAngle = 0
 
   if (e.beta) {
-    deltaAngle = currentDeviceAngle - e.beta
-    dz = deltaAngle * -0.005
+    if (currentDeviceAngle === 0) currentDeviceAngle = e.beta
+    deltaAngle = e.beta - currentDeviceAngle
+    dz = deltaAngle * 0.001
   }
 
   if (e.deltaY) dz = e.deltaY * 0.001
