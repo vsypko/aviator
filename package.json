@@ -1,0 +1,22 @@
+{
+  "name": "aviator_old",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel --port 5500 --no-source-maps --open --no-cache",
+    "build": "parcel build ./index.html --public-url ./ --no-cache",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.146.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/three": "^0.146.0",
+    "parcel": "^2.8.0"
+  }
+}
