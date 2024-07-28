@@ -24,7 +24,7 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true,
 })
 let mouseDown = false
-let currentDeviceAngle = 0
+let currentDeviceAngle = 60
 
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.shadowMap.enabled = true
@@ -93,19 +93,18 @@ function handlePointerMove(e) {
 
 function handleWheel(e) {
   e.preventDefault()
+
   let dz = 0
   let deltaAngle = 0
 
   if (e.beta) {
     deltaAngle = currentDeviceAngle - e.beta
-    console.log(deltaAngle)
-    dz = deltaAngle > 0 ? (dz = -0.2) : (dz = 0.2)
-    currentDeviceAngle = e.beta
+    dz = deltaAngle * -0.005
   }
 
   if (e.deltaY) dz = e.deltaY * 0.001
 
-  ptr_pos.z = ptr_pos.z + dz
+  ptr_pos.z += dz
   if (ptr_pos.z < -1) {
     ptr_pos.z = -1
   }
@@ -116,7 +115,7 @@ function handleWheel(e) {
 
 function handleKey(e) {
   e.preventDefault()
-
+  e.stopImmediatePropagation()
   switch (e.code) {
     case 'ArrowLeft':
       ptr_pos.x -= 0.1
@@ -132,10 +131,6 @@ function handleKey(e) {
       break
   }
 }
-
-// function handleDeviceOrientation(e) {
-//   e.preventDefault()
-// }
 
 function normalize(v, vmin, vmax, tmin, tmax) {
   let nv = Math.max(Math.min(v, vmax), vmin)
