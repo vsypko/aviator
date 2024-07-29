@@ -1,7 +1,11 @@
-import * as THREE from "three"
-import { colors } from "../constants.ts"
+import * as THREE from 'three'
+import { colors } from '../constants'
 
 export default class Cloud {
+  mesh: THREE.Object3D
+  geom: THREE.SphereGeometry
+  mat: THREE.MeshPhongMaterial
+
   constructor() {
     this.mesh = new THREE.Object3D()
     this.geom = new THREE.SphereGeometry(10, 24, 24)
@@ -21,7 +25,6 @@ export default class Cloud {
       let s = 0.05 + Math.random() * 0.9
       m.scale.set(s, s, s)
       m.castShadow = true
-      // m.receiveShadow = true
       this.mesh.add(m)
     }
   }

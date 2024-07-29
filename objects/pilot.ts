@@ -1,20 +1,30 @@
-import * as THREE from "three"
-import { colors } from "../constants.ts"
+import * as THREE from 'three'
+import { colors } from '../constants.ts'
 export default class Pilot {
+  mesh: THREE.Object3D
+  angleHairs: number
+  hairsTop: THREE.Object3D
+
   constructor() {
     this.mesh = new THREE.Object3D()
-    this.mesh.name = "pilot"
+    this.mesh.name = 'pilot'
     this.angleHairs = 0.0
     // Body of the pilot
     const bodyGeom = new THREE.BoxGeometry(15, 15, 15)
-    const bodyMat = new THREE.MeshPhongMaterial({ color: colors.brown, flatShading: true })
+    const bodyMat = new THREE.MeshPhongMaterial({
+      color: colors.brown,
+      flatShading: true,
+    })
     const body = new THREE.Mesh(bodyGeom, bodyMat)
     body.position.set(2, -12, 0)
     this.mesh.add(body)
 
     // Face of the pilot
     const faceGeom = new THREE.BoxGeometry(10, 10, 10)
-    const faceMat = new THREE.MeshLambertMaterial({ color: colors.pink, flatShading: true })
+    const faceMat = new THREE.MeshLambertMaterial({
+      color: colors.pink,
+      flatShading: true,
+    })
     const face = new THREE.Mesh(faceGeom, faceMat)
     this.mesh.add(face)
 

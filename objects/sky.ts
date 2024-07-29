@@ -1,7 +1,10 @@
-import * as THREE from "three"
-import Cloud from "./clouds"
+import * as THREE from 'three'
+import Cloud from './clouds'
 
 export default class Sky {
+  mesh: THREE.Object3D
+  nClouds: number
+
   constructor() {
     this.mesh = new THREE.Object3D()
     this.nClouds = 20

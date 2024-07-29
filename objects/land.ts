@@ -1,7 +1,10 @@
-import * as THREE from "three"
-import { colors } from "../constants.ts"
+import * as THREE from 'three'
+import { colors } from '../constants.ts'
 
 export default class Land {
+  geom: THREE.CylinderGeometry
+  mat: THREE.MeshPhongMaterial
+  mesh: THREE.Mesh
   constructor() {
     this.geom = new THREE.CylinderGeometry(650, 650, 900, 40, 10)
     this.geom.rotateX(-Math.PI / 2)

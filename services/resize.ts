@@ -1,4 +1,7 @@
-export function handleWindowResize(renderer, camera) {
+export function handleWindowResize(
+  renderer: THREE.WebGLRenderer,
+  camera: THREE.PerspectiveCamera
+) {
   // update height and width of the renderer and the camera
   const HEIGHT = window.innerHeight
   const WIDTH = window.innerWidth

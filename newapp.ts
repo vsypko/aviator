@@ -1,10 +1,8 @@
 import * as THREE from 'three'
-import { colors } from './constants.ts'
 import { handleWindowResize } from './services/resize'
 import Land from './objects/land'
 import Sky from './objects/sky'
 import AirPlane from './objects/airplane'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import './app.css'
 
@@ -23,8 +21,8 @@ const renderer = new THREE.WebGLRenderer({
   alpha: true,
   antialias: true,
 })
-let mouseDown = false
-let currentDeviceAngle = 0
+let mouseDown: boolean = false
+let currentDeviceAngle: number = 0
 
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.shadowMap.enabled = true
@@ -59,7 +57,7 @@ shadowLight.shadow.mapSize.height = 2048
 // scene.add(hemisphereLight)
 scene.add(shadowLight)
 
-const land = new Land()
+const land: Land = new Land()
 // land.mesh.position.y = -600
 land.mesh.position.set(0, -600, 0)
 scene.add(land.mesh)
@@ -84,26 +82,26 @@ function handlePointerUp() {
   mouseDown = false
 }
 
-function handlePointerMove(e) {
+function handlePointerMove(e: PointerEvent) {
   if (!mouseDown) return
   e.preventDefault()
   ptr_pos.x = -1 + (e.clientX / window.innerWidth) * 2
   ptr_pos.y = 1 - (e.clientY / window.innerHeight) * 2
 }
 
-function handleWheel(e) {
+function handleWheel(e: DeviceOrientationEvent | WheelEvent): void {
   e.preventDefault()
 
   let dz = 0
   let deltaAngle = 0
 
-  if (e.beta) {
+  if (e instanceof DeviceOrientationEvent && e.beta) {
     if (currentDeviceAngle === 0) currentDeviceAngle = e.beta
     deltaAngle = e.beta - currentDeviceAngle
     dz = deltaAngle * 0.001
   }
 
-  if (e.deltaY) dz = e.deltaY * 0.001
+  if (e instanceof WheelEvent && e.deltaY) dz = e.deltaY * 0.001
 
   ptr_pos.z += dz
   if (ptr_pos.z < -1) {
@@ -114,7 +112,7 @@ function handleWheel(e) {
   }
 }
 
-function handleKey(e) {
+function handleKey(e: KeyboardEvent) {
   e.preventDefault()
   e.stopImmediatePropagation()
   switch (e.code) {
@@ -133,7 +131,13 @@ function handleKey(e) {
   }
 }
 
-function normalize(v, vmin, vmax, tmin, tmax) {
+function normalize(
+  v: number,
+  vmin: number,
+  vmax: number,
+  tmin: number,
+  tmax: number
+) {
   let nv = Math.max(Math.min(v, vmax), vmin)
   let dv = vmax - vmin
   let pc = (nv - vmin) / dv
@@ -154,10 +158,10 @@ function updatePlane() {
   airplane.propeller.rotation.x += 0.3
   airplane.pilot.updateHairs()
 }
-document.addEventListener('pointerdown', handlePointerDown, false)
-document.addEventListener('pointerup', handlePointerUp, false)
-document.addEventListener('pointermove', handlePointerMove, false)
-document.addEventListener('wheel', handleWheel, false)
+window.addEventListener('pointerdown', handlePointerDown, false)
+window.addEventListener('pointerup', handlePointerUp, false)
+window.addEventListener('pointermove', handlePointerMove, false)
+window.addEventListener('wheel', handleWheel, false)
 window.addEventListener('keydown', handleKey, false)
 window.addEventListener('deviceorientation', handleWheel, false)
 
