@@ -1,4 +1,12 @@
-export const boxAdjust = (geom, y1, z1, y2, z2) => {
+import { BoxGeometry } from 'three'
+
+export const boxAdjust = (
+  geom: BoxGeometry,
+  y1: number,
+  z1: number,
+  y2: number,
+  z2: number
+) => {
   const pos = geom.attributes.position
 
   for (let i = 0; i < pos.count; i++) {

@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { colors } from '../constants'
-import { boxAdjust } from './adjust'
+import { boxAdjust } from '../services/adjust'
 import Pilot from './pilot'
 
 export default class AirPlane {
